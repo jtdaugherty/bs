@@ -3,24 +3,33 @@
 set -e
 
 function install_vimrc {
-    pushd $HOME
-    git clone ssh://git@github.com/jtaugherty/vimrc.git
-    ln -s vimrc/vimrc ~/.vimrc
-    pushd vimrc && bash setup.sh && popd
-    popd
+    if [ ! -e $HOME/.vimrc ]
+    then
+        pushd $HOME
+        git clone ssh://git@github.com/jtaugherty/vimrc.git
+        ln -s vimrc/vimrc ~/.vimrc
+        pushd vimrc && bash setup.sh && popd
+        popd
+    fi
 }
 
 function install_tmux_config {
-    pushd $HOME
-    git clone ssh://git@github.com/jtaugherty/tmux-config.git
-    ln -s tmux-config/tmux.conf ~/.tmux.conf
-    popd
+    if [ ! -e $HOME/.tmux.conf ]
+    then
+        pushd $HOME
+        git clone ssh://git@github.com/jtaugherty/tmux-config.git
+        ln -s tmux-config/tmux.conf ~/.tmux.conf
+        popd
+    fi
 }
 
 function install_tmux_status {
-    pushd $HOME
-    git clone ssh://git@github.com/jtaugherty/tmux-status.git
-    popd
+    if [ ! -e $HOME/tmux-status ]
+    then
+        pushd $HOME
+        git clone ssh://git@github.com/jtdaugherty/tmux-status.git
+        popd
+    fi
 }
 
 install_vimrc
